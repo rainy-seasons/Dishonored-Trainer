@@ -23,7 +23,6 @@ bool PMemory::Process()
 		m_pHandle = OpenProcess(PROCESS_ALL_ACCESS, NULL, m_PID);
 		return true;
 	}
-		
 	
 	return FALSE;
 }
