@@ -19,8 +19,10 @@ int main()
 
 	for (;;)
 	{
-		Feature.InfResource(Feature.GetManaBase(), Feature.GetManaOffsets(), 100);
-		Feature.InfResource(Feature.GetHealthBase(), Feature.GetHealthOffsets(), 90);
+		Feature.Run();
+
+//		Feature.InfResource(Feature.GetManaBase(), Feature.GetManaOffsets(), 100);
+//		Feature.InfResource(Feature.GetHealthBase(), Feature.GetHealthOffsets(), 90);
 	}
 
 	return 0;
