@@ -17,7 +17,7 @@ public:
 	~FeatureManager();
 	void InfResource(DWORD ResourceBase, std::vector<DWORD> v_offsets, int MaxValue);
 	DWORD InitOffsets(std::vector<DWORD> v_offsets);
-	void ChangeState(std::string szFeature);
+	void CheckInput();
 	void Run();
 
 private:
