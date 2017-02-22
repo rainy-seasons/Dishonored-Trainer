@@ -23,6 +23,7 @@ public:
 private:
 	PMemory Mem;
 	DWORD m_BaseAddr;
-	Feature InfiniteMana;
-	Feature InfiniteHealth;
+	Feature m_InfiniteMana;
+	Feature m_InfiniteHealth;
+	Feature m_InfiniteBolts;
 };
