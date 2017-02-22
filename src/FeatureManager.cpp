@@ -5,6 +5,9 @@ FeatureManager::FeatureManager()
 	if (!Mem.Process()) { std::cout << " \nMem.Process() Fail\n"; }
 	m_BaseAddr   = Mem.Module("Dishonored.exe");
 
+	m_CurrentLeftHand.vec_offsets  = { 0x0104CF44, 0x1C, 0xC, 0x5C, 0xD0, 0x238 };
+	m_CurrentLeftHand.dw_Base      = FeatureManager::InitOffsets(m_CurrentLeftHand.vec_offsets);
+
 	m_InfiniteMana.vec_offsets     = { 0x01065184, 0xEC, 0x0, 0x5A8 };
 	m_InfiniteMana.dw_Base         = FeatureManager::InitOffsets(m_InfiniteMana.vec_offsets);
 	m_InfiniteMana.l_MaxValue      = 100;

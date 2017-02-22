@@ -10,6 +10,12 @@ struct Feature
 	int l_MaxValue;
 };
 
+struct ReadOnlyValue
+{
+	std::vector<DWORD> vec_offsets {};
+	DWORD dw_Base;
+};
+
 class FeatureManager
 {
 public:
@@ -23,6 +29,7 @@ public:
 private:
 	PMemory Mem;
 	DWORD m_BaseAddr;
+	ReadOnlyValue m_CurrentLeftHand;
 	Feature m_InfiniteMana;
 	Feature m_InfiniteHealth;
 	Feature m_InfiniteBolts;
