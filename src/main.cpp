@@ -3,6 +3,8 @@
 #include <string>
 #include "FeatureManager.h"
 
+void Display();
+
 PMemory Mem;
 
 int main()
@@ -14,6 +16,7 @@ int main()
 		Sleep(300);
 	} while (!Mem.Process());
 	std::cout << "Found Dishonored!\n\n" << std::endl;
+	Display();
 
 	FeatureManager Feature;
 
@@ -23,4 +26,15 @@ int main()
 	}
 
 	return 0;
+}
+
+void Display()
+{
+	Sleep(200);
+	system("cls");
+	std::cout << "		Honored\n";
+	std::cout << "--------------------------------------------\n";
+	std::cout << "|| [ R ARROW ] --> Toggle Infinite Health ||\n";
+	std::cout << "|| [ L ARROW ] --> Toggle Infinite Mana	  ||\n";
+	std::cout << "--------------------------------------------\n\n";
 }
