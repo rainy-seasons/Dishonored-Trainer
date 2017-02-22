@@ -32,9 +32,10 @@ void Display()
 {
 	Sleep(200);
 	system("cls");
-	std::cout << "		Honored\n";
+	std::cout << "||	  	  Honored		  ||\n";
 	std::cout << "--------------------------------------------\n";
 	std::cout << "|| [ R ARROW ] --> Toggle Infinite Health ||\n";
 	std::cout << "|| [ L ARROW ] --> Toggle Infinite Mana	  ||\n";
+	std::cout << "|| [ U ARROW ] --> Toggle Infinite Bolts  ||\n";
 	std::cout << "--------------------------------------------\n\n";
 }

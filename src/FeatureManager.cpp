@@ -21,7 +21,7 @@ FeatureManager::FeatureManager()
 	m_InfiniteBolts.vec_offsets    = { 0x0103CC9C, 0x20, 0x24, 0x54, 0xBC, 0x10 };
 	m_InfiniteBolts.dw_Base        = FeatureManager::InitOffsets(m_InfiniteBolts.vec_offsets);
 	m_InfiniteBolts.l_MaxValue     = 90;
-	m_InfiniteBolts.b_ActiveState  = true;
+	m_InfiniteBolts.b_ActiveState  = false;
 }
 
 FeatureManager::~FeatureManager()
@@ -55,6 +55,13 @@ void FeatureManager::CheckInput()
 	{
 		m_InfiniteMana.b_ActiveState = !m_InfiniteMana.b_ActiveState;
 		std::cout << "Infinite Mana = " << m_InfiniteMana.b_ActiveState << std::endl;
+		Sleep(150);
+	}
+
+	if (GetAsyncKeyState(VK_UP))
+	{
+		m_InfiniteBolts.b_ActiveState = !m_InfiniteBolts.b_ActiveState;
+		std::cout << "Infinate Bolts = " << m_InfiniteBolts.b_ActiveState << std::endl;
 		Sleep(150);
 	}
 }
