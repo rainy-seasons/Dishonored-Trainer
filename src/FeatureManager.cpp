@@ -4,6 +4,8 @@ FeatureManager::FeatureManager()
 {
 	if (!Mem.Process()) { std::cout << " \nMem.Process() Fail\n"; }
 	m_BaseAddr   = Mem.Module("Dishonored.exe");
+	m_MaxAmmo = 99;
+	m_InfiniteAmmoState = false;
 
 	m_CurrentLeftHand.vec_offsets  = { 0x0104CF44, 0x1C, 0xC, 0x5C, 0xD0, 0x238 };
 	m_CurrentLeftHand.dw_Base      = FeatureManager::InitOffsets(m_CurrentLeftHand.vec_offsets);
@@ -17,11 +19,6 @@ FeatureManager::FeatureManager()
 	m_InfiniteHealth.dw_Base       = FeatureManager::InitOffsets(m_InfiniteHealth.vec_offsets);
 	m_InfiniteHealth.l_MaxValue    = 90;
 	m_InfiniteHealth.b_ActiveState = false;
-
-	m_InfiniteBolts.vec_offsets    = { 0x0103CC9C, 0x20, 0x24, 0x54, 0xBC, 0x10 };
-	m_InfiniteBolts.dw_Base        = FeatureManager::InitOffsets(m_InfiniteBolts.vec_offsets);
-	m_InfiniteBolts.l_MaxValue     = 90;
-	m_InfiniteBolts.b_ActiveState  = false;
 }
 
 FeatureManager::~FeatureManager()
@@ -37,9 +34,9 @@ void FeatureManager::Run()
 
 	if (m_InfiniteHealth.b_ActiveState)
 		InfResource(m_InfiniteHealth.dw_Base, m_InfiniteHealth.vec_offsets, m_InfiniteHealth.l_MaxValue);
-
-	if (m_InfiniteBolts.b_ActiveState)
-		InfResource(m_InfiniteBolts.dw_Base, m_InfiniteBolts.vec_offsets, m_InfiniteBolts.l_MaxValue);
+	
+	if (m_InfiniteAmmoState)
+		InfAmmo();
 }
 
 void FeatureManager::CheckInput()
@@ -60,8 +57,8 @@ void FeatureManager::CheckInput()
 
 	if (GetAsyncKeyState(VK_UP))
 	{
-		m_InfiniteBolts.b_ActiveState = !m_InfiniteBolts.b_ActiveState;
-		std::cout << "Infinate Bolts = " << m_InfiniteBolts.b_ActiveState << std::endl;
+		m_InfiniteAmmoState = !m_InfiniteAmmoState;
+		std::cout << "Infinite Ammo = " << m_InfiniteAmmoState << std::endl;
 		Sleep(150);
 	}
 }
@@ -85,5 +82,47 @@ void FeatureManager::InfResource(DWORD ResourceBase, std::vector<DWORD> v_offset
 	if (dw_Resource < MaxValue)
 	{
 		Mem.Write<DWORD>(ResourceBase + v_offsets.back(), MaxValue);
+	}
+}
+
+void FeatureManager::SetAmmo(WeaponOffset offset)
+{
+	DWORD dw_AmmoBase = InitOffsets(m_vecWeaponAmmoBase);
+	DWORD dw_Ammo = Mem.Read<DWORD>(dw_AmmoBase + offset);
+
+	if (dw_Ammo < m_MaxAmmo)
+	{
+		Mem.Write<DWORD>(dw_AmmoBase + offset, m_MaxAmmo);
+	}
+}
+
+void FeatureManager::InfAmmo()
+{
+	switch (Mem.Read<DWORD>(m_CurrentLeftHand.dw_Base + m_CurrentLeftHand.vec_offsets.back())) // Get the current held weapon
+	{
+		case 0:    // pistol
+			FeatureManager::SetAmmo(e_Pistol);
+			break;
+		case 1:    // regular bolts
+			FeatureManager::SetAmmo(e_RegBolts);
+			break;
+		case 2:    // springrazor
+			FeatureManager::SetAmmo(e_SpringRazor);
+			break;
+		case 3:    // sleep bolts
+			break;
+		case 4:    // incendiary bolts
+			FeatureManager::SetAmmo(e_IncenBolts);
+			break;
+		case 5:    // heart
+			break;
+		case 6:    // blink
+			break;
+		case 7:    // dark vision
+			break;
+		case 8:    // ??
+			break;
+		case 9:    // ??
+			break;
 	}
 }
