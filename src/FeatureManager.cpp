@@ -110,6 +110,7 @@ void FeatureManager::InfAmmo()
 			FeatureManager::SetAmmo(e_SpringRazor);
 			break;
 		case 3:    // sleep bolts
+			FeatureManager::SetAmmo(e_SleepBolts);
 			break;
 		case 4:    // incendiary bolts
 			FeatureManager::SetAmmo(e_IncenBolts);

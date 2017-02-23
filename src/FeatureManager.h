@@ -18,11 +18,11 @@ struct ReadOnlyValue
 
 enum WeaponOffset
 {
-	e_Pistol = 0x0,
-	e_RegBolts = 0x10,
-	e_IncenBolts = 0x20,
-	e_SpringRazor = 0x28,	
-
+	e_Pistol      = 0x0,
+	e_RegBolts    = 0x10,
+	e_SleepBolts  = 0x18,
+	e_IncenBolts  = 0x20,
+	e_SpringRazor = 0x28,
 };
 
 class FeatureManager
