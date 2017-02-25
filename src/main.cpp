@@ -37,5 +37,6 @@ void Display()
 	std::cout << "|| [ R ARROW ] --> Toggle Infinite Health ||\n";
 	std::cout << "|| [ L ARROW ] --> Toggle Infinite Mana	  ||\n";
 	std::cout << "|| [ U ARROW ] --> Toggle Infinite Ammo   ||\n";
+	std::cout << "|| [ D ARROW ] --> Toggle Infinite Gold   ||\n";
 	std::cout << "--------------------------------------------\n\n";
 }

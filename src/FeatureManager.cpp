@@ -19,6 +19,11 @@ FeatureManager::FeatureManager()
 	m_InfiniteHealth.dw_Base       = FeatureManager::InitOffsets(m_InfiniteHealth.vec_offsets);
 	m_InfiniteHealth.l_MaxValue    = 90;
 	m_InfiniteHealth.b_ActiveState = false;
+
+	m_InfiniteGold.vec_offsets     = { 0x01065184, 0xEC, 0x0, 0xE4, 0xC8, 0x88 };
+	m_InfiniteGold.dw_Base         = FeatureManager::InitOffsets(m_InfiniteGold.vec_offsets);
+	m_InfiniteGold.l_MaxValue      = 999;
+	m_InfiniteGold.b_ActiveState   = false;
 }
 
 FeatureManager::~FeatureManager()
@@ -35,6 +40,9 @@ void FeatureManager::Run()
 	if (m_InfiniteHealth.b_ActiveState)
 		InfResource(m_InfiniteHealth.dw_Base, m_InfiniteHealth.vec_offsets, m_InfiniteHealth.l_MaxValue);
 	
+	if (m_InfiniteGold.b_ActiveState)
+		InfResource(m_InfiniteGold.dw_Base, m_InfiniteGold.vec_offsets, m_InfiniteGold.l_MaxValue);
+
 	if (m_InfiniteAmmoState)
 		InfAmmo();
 }
@@ -52,6 +60,13 @@ void FeatureManager::CheckInput()
 	{
 		m_InfiniteMana.b_ActiveState = !m_InfiniteMana.b_ActiveState;
 		std::cout << "Infinite Mana = " << m_InfiniteMana.b_ActiveState << std::endl;
+		Sleep(150);
+	}
+
+	if (GetAsyncKeyState(VK_DOWN))
+	{
+		m_InfiniteGold.b_ActiveState = !m_InfiniteGold.b_ActiveState;
+		std::cout << "Infinite Gold = " << m_InfiniteGold.b_ActiveState << std::endl;
 		Sleep(150);
 	}
 
@@ -115,15 +130,7 @@ void FeatureManager::InfAmmo()
 		case 4:    // incendiary bolts
 			FeatureManager::SetAmmo(e_IncenBolts);
 			break;
-		case 5:    // heart
-			break;
 		case 6:    // blink
-			break;
-		case 7:    // dark vision
-			break;
-		case 8:    // ??
-			break;
-		case 9:    // ??
 			break;
 	}
 }

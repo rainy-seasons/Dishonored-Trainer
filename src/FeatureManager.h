@@ -45,6 +45,7 @@ private:
 	ReadOnlyValue m_CurrentLeftHand;
 	Feature m_InfiniteMana;
 	Feature m_InfiniteHealth;
+	Feature m_InfiniteGold;
 
 	std::vector<DWORD> m_vecWeaponAmmoBase = { 0x0103CC9C, 0x20, 0x24, 0x54, 0xBC, 0x0 };
 };
