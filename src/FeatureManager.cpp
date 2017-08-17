@@ -83,7 +83,7 @@ DWORD FeatureManager::InitOffsets(std::vector<DWORD> v_offsets)
 	DWORD BaseAddress = m_BaseAddr;
 
 	// stop at the 2nd to last element to add it on later, 
-	// do this because we don't want the 'read' value when we go to write to it
+	// do this because we want the address instead of the value when we go to write to it
 	for (std::vector<DWORD>::iterator itr = v_offsets.begin(); itr < v_offsets.end() - 1; ++itr)
 	{
 		BaseAddress = Mem.Read<DWORD>(BaseAddress + *itr);

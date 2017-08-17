@@ -2,13 +2,22 @@
 #include <iostream>
 #include <string>
 #include "FeatureManager.h"
+#include "SettingManager.h"
 
 void Display();
 
 PMemory Mem;
+FeatureManager Feature;
+SettingManager Settings;
 
 int main()
 {
+	/*
+	if (!Settings.FileExists("config.ini"))	
+		Settings.WriteDefaults();
+	else
+		Settings.InitSettings();
+		*/
 	do
 	{
 		system("cls");
@@ -18,10 +27,9 @@ int main()
 	std::cout << "Found Dishonored!\n\n" << std::endl;
 	Display();
 
-	FeatureManager Feature;
-
 	for (;;)
 	{
+
 		Feature.Run();
 	}
 

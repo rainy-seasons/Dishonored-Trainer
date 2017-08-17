@@ -1,2 +1,2 @@
 honored: src/main.cpp
-	g++ src/*.cpp src/*.h -o bin/honored.exe -w -std=c++11
+	g++ src/*.cpp -o bin/honored.exe -w -std=c++11 -ld3d9

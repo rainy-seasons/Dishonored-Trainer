@@ -2,18 +2,16 @@
 #include <string>
 #include "PMemory.h"
 
-struct Feature 
+struct FeatureReadOnly
 {
-	bool b_ActiveState;
 	std::vector<DWORD> vec_offsets {};
 	DWORD dw_Base;
-	int l_MaxValue;
 };
 
-struct ReadOnlyValue
+struct Feature : FeatureReadOnly
 {
-	std::vector<DWORD> vec_offsets {};
-	DWORD dw_Base;
+	bool b_ActiveState;
+	int l_MaxValue;
 };
 
 enum WeaponOffset
@@ -42,7 +40,7 @@ private:
 	DWORD m_BaseAddr;
 	bool m_InfiniteAmmoState;
 	int m_MaxAmmo;
-	ReadOnlyValue m_CurrentLeftHand;
+	FeatureReadOnly m_CurrentLeftHand;
 	Feature m_InfiniteMana;
 	Feature m_InfiniteHealth;
 	Feature m_InfiniteGold;
