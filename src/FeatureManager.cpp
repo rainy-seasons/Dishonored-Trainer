@@ -7,6 +7,10 @@ FeatureManager::FeatureManager()
 	m_MaxAmmo = 99;
 	m_InfiniteAmmoState = false;
 
+	if (!Settings.FileExists("config.ini"))	
+		Settings.WriteDefaults();
+	Settings.InitSettings();
+
 	m_CurrentLeftHand.vec_offsets  = { 0x0104CF44, 0x1C, 0xC, 0x5C, 0xD0, 0x238 };
 	m_CurrentLeftHand.dw_Base      = FeatureManager::InitOffsets(m_CurrentLeftHand.vec_offsets);
 
@@ -32,14 +36,14 @@ FeatureManager::~FeatureManager()
 
 void FeatureManager::Run()
 {
-	FeatureManager::CheckInput();
+ 	FeatureManager::CheckInput();
 
 	if (m_InfiniteMana.b_ActiveState)
 		InfResource(m_InfiniteMana.dw_Base, m_InfiniteMana.vec_offsets, m_InfiniteMana.l_MaxValue);
 
 	if (m_InfiniteHealth.b_ActiveState)
 		InfResource(m_InfiniteHealth.dw_Base, m_InfiniteHealth.vec_offsets, m_InfiniteHealth.l_MaxValue);
-	
+
 	if (m_InfiniteGold.b_ActiveState)
 		InfResource(m_InfiniteGold.dw_Base, m_InfiniteGold.vec_offsets, m_InfiniteGold.l_MaxValue);
 
@@ -49,28 +53,28 @@ void FeatureManager::Run()
 
 void FeatureManager::CheckInput()
 {
-	if (GetAsyncKeyState(VK_RIGHT))	
+	if (GetAsyncKeyState(Settings.GetHealthKey()))
 	{
 		m_InfiniteHealth.b_ActiveState = !m_InfiniteHealth.b_ActiveState;
 		std::cout << "Infinite Health = " << m_InfiniteHealth.b_ActiveState << std::endl;
 		Sleep(150);
 	}
 
-	if (GetAsyncKeyState(VK_LEFT))	
+	if (GetAsyncKeyState(Settings.GetManaKey()))	
 	{
 		m_InfiniteMana.b_ActiveState = !m_InfiniteMana.b_ActiveState;
 		std::cout << "Infinite Mana = " << m_InfiniteMana.b_ActiveState << std::endl;
 		Sleep(150);
 	}
 
-	if (GetAsyncKeyState(VK_DOWN))
+	if (GetAsyncKeyState(Settings.GetGoldKey()))
 	{
 		m_InfiniteGold.b_ActiveState = !m_InfiniteGold.b_ActiveState;
 		std::cout << "Infinite Gold = " << m_InfiniteGold.b_ActiveState << std::endl;
 		Sleep(150);
 	}
 
-	if (GetAsyncKeyState(VK_UP))
+	if (GetAsyncKeyState(Settings.GetAmmoKey()))
 	{
 		m_InfiniteAmmoState = !m_InfiniteAmmoState;
 		std::cout << "Infinite Ammo = " << m_InfiniteAmmoState << std::endl;

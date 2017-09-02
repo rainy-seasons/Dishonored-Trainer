@@ -4,7 +4,6 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include "SettingManager.h"
-#include "../lib/ParseINI.h"
 
 bool SettingManager::FileExists(const std::string &filename)
 {
@@ -34,10 +33,10 @@ void SettingManager::InitSettings()
 {
 	std::cout << "Initializing Settings..." << std::endl;
 
-	KEY_INF_HEALTH = std::stoi(m_Cfg.ReadString("KeyBinds", "InfiniteHealth"), 0, 16);
-	KEY_INF_MANA = std::stoi(m_Cfg.ReadString("KeyBinds", "InfiniteMana"), 0, 16);
-	KEY_INF_AMMO = std::stoi(m_Cfg.ReadString("KeyBinds", "InfiniteAmmo"), 0, 16);
-	KEY_INF_GOLD = std::stoi(m_Cfg.ReadString("KeyBinds", "InfiniteAmmo"), 0, 16);
+	KEY_INF_HEALTH = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Health"), 0, 16);
+	KEY_INF_MANA   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Mana"), 0, 16);
+	KEY_INF_AMMO   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Ammo"), 0, 16);
+	KEY_INF_GOLD   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Gold"), 0, 16);
 }
 
 DWORD SettingManager::GetHealthKey() { return KEY_INF_HEALTH;}

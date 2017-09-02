@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include "FeatureManager.h"
-#include "SettingManager.h"
 
 void Display();
 
@@ -12,16 +11,10 @@ SettingManager Settings;
 
 int main()
 {
-	/*
-	if (!Settings.FileExists("config.ini"))	
-		Settings.WriteDefaults();
-	else
-		Settings.InitSettings();
-		*/
 	do
 	{
 		system("cls");
-		std::cout << ("Waiting for dishonored..") << std::endl;
+		std::cout << ("Waiting for Dishonored..") << std::endl;
 		Sleep(300);
 	} while (!Mem.Process());
 	std::cout << "Found Dishonored!\n\n" << std::endl;
@@ -29,7 +22,6 @@ int main()
 
 	for (;;)
 	{
-
 		Feature.Run();
 	}
 
