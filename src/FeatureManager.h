@@ -29,6 +29,7 @@ class FeatureManager
 public:
 	FeatureManager();
 	~FeatureManager();
+	Feature Setup(Feature feature, std::vector<DWORD> v_offsets, int MaxValue, bool ActiveState);
 	void InfResource(DWORD ResourceBase, std::vector<DWORD> v_offsets, int MaxValue);
 	void SetAmmo(WeaponOffset offset);
 	void InfAmmo();

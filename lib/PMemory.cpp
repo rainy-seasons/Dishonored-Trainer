@@ -1,12 +1,9 @@
 #include "PMemory.h"
 #include <stdio.h>
 
-using namespace std;
-
 PMemory::PMemory()
 {
 }
-
 
 PMemory::~PMemory()
 {

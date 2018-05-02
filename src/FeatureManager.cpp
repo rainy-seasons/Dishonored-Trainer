@@ -14,24 +14,21 @@ FeatureManager::FeatureManager()
 	m_CurrentLeftHand.vec_offsets  = { 0x0104CF44, 0x1C, 0xC, 0x5C, 0xD0, 0x238 };
 	m_CurrentLeftHand.dw_Base      = FeatureManager::InitOffsets(m_CurrentLeftHand.vec_offsets);
 
-	m_InfiniteMana.vec_offsets     = { 0x01065184, 0xEC, 0x0, 0x5A8 };
-	m_InfiniteMana.dw_Base         = FeatureManager::InitOffsets(m_InfiniteMana.vec_offsets);
-	m_InfiniteMana.l_MaxValue      = 100;
-	m_InfiniteMana.b_ActiveState   = false;
-
-	m_InfiniteHealth.vec_offsets   = { 0x0103CC84, 0x8, 0x24, 0x15C, 0x344 };
-	m_InfiniteHealth.dw_Base       = FeatureManager::InitOffsets(m_InfiniteHealth.vec_offsets);
-	m_InfiniteHealth.l_MaxValue    = 90;
-	m_InfiniteHealth.b_ActiveState = false;
-
-	m_InfiniteGold.vec_offsets     = { 0x01065184, 0xEC, 0x0, 0xE4, 0xC8, 0x88 };
-	m_InfiniteGold.dw_Base         = FeatureManager::InitOffsets(m_InfiniteGold.vec_offsets);
-	m_InfiniteGold.l_MaxValue      = 999;
-	m_InfiniteGold.b_ActiveState   = false;
+	m_InfiniteMana   = FeatureManager::Setup(m_InfiniteMana,   { 0x01065184, 0xEC, 0x0, 0x5A8 }, 100, false);
+	m_InfiniteGold   = FeatureManager::Setup(m_InfiniteGold,   { 0x01065184, 0xEC, 0x0, 0xE4, 0xC8, 0x88 }, 999, false);
+	m_InfiniteHealth = FeatureManager::Setup(m_InfiniteHealth, { 0x0103CC84, 0x8, 0x24, 0x15C, 0x344 }, 90, false);
 }
 
 FeatureManager::~FeatureManager()
 {
+}
+
+Feature FeatureManager::Setup(Feature feature, std::vector<DWORD> v_offsets, int MaxValue, bool ActiveState)
+{
+	feature.vec_offsets   = v_offsets;
+	feature.dw_Base       = FeatureManager::InitOffsets(feature.vec_offsets);
+	feature.l_MaxValue    = MaxValue;
+	feature.b_ActiveState = ActiveState;
 }
 
 void FeatureManager::Run()
@@ -92,6 +89,7 @@ DWORD FeatureManager::InitOffsets(std::vector<DWORD> v_offsets)
 	{
 		BaseAddress = Mem.Read<DWORD>(BaseAddress + *itr);
 	}
+
 	return BaseAddress;
 }
 
@@ -119,19 +117,19 @@ void FeatureManager::InfAmmo()
 {
 	switch (Mem.Read<DWORD>(m_CurrentLeftHand.dw_Base + m_CurrentLeftHand.vec_offsets.back())) // Get the current held weapon
 	{
-		case 0:    // pistol
+		case 0:
 			FeatureManager::SetAmmo(e_Pistol);
 			break;
-		case 1:    // regular bolts
+		case 1:
 			FeatureManager::SetAmmo(e_RegBolts);
 			break;
-		case 2:    // springrazor
+		case 2:
 			FeatureManager::SetAmmo(e_SpringRazor);
 			break;
-		case 3:    // sleep bolts
+		case 3:
 			FeatureManager::SetAmmo(e_SleepBolts);
 			break;
-		case 4:    // incendiary bolts
+		case 4:
 			FeatureManager::SetAmmo(e_IncenBolts);
 			break;
 		case 6:    // blink
