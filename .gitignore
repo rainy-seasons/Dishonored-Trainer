@@ -32,3 +32,7 @@
 *~
 *.swp
 *.swo
+
+# Extra
+*.ini
+*.cfg

@@ -5,6 +5,17 @@
 #include <stdlib.h>
 #include "SettingManager.h"
 
+SettingManager::SettingManager()
+{
+	Key = &k;
+	free(&k);
+}
+
+SettingManager::~SettingManager()
+{
+	free(Key);
+}
+
 bool SettingManager::FileExists(const std::string &filename)
 {
 	struct stat buf;
@@ -33,13 +44,13 @@ void SettingManager::InitSettings()
 {
 	std::cout << "Initializing Settings..." << std::endl;
 
-	KEY_INF_HEALTH = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Health"), 0, 16);
-	KEY_INF_MANA   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Mana"), 0, 16);
-	KEY_INF_AMMO   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Ammo"), 0, 16);
-	KEY_INF_GOLD   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Gold"), 0, 16);
+	Key->INF_HEALTH = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Health"), 0, 16);
+	Key->INF_MANA   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Mana"), 0, 16);
+	Key->INF_AMMO   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Ammo"), 0, 16);
+	Key->INF_GOLD   = std::stoi(m_Cfg.ReadString("Keybinds", "Infinite Gold"), 0, 16);
 }
 
-DWORD SettingManager::GetHealthKey() { return KEY_INF_HEALTH;}
-DWORD SettingManager::GetManaKey()   { return KEY_INF_MANA; }
-DWORD SettingManager::GetAmmoKey()   { return KEY_INF_AMMO; }
-DWORD SettingManager::GetGoldKey()   { return KEY_INF_GOLD; }
+DWORD SettingManager::GetHealthKey() { return Key->INF_HEALTH;}
+DWORD SettingManager::GetManaKey()   { return Key->INF_MANA; }
+DWORD SettingManager::GetAmmoKey()   { return Key->INF_AMMO; }
+DWORD SettingManager::GetGoldKey()   { return Key->INF_GOLD; }

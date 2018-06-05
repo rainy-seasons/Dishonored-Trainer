@@ -3,9 +3,19 @@
 #include <string>
 #include "../lib/parseINI.h"
 
+struct KEY
+{
+	DWORD INF_MANA;
+	DWORD INF_AMMO;
+	DWORD INF_GOLD;
+	DWORD INF_HEALTH;
+};
+
 class SettingManager
 {
 public:
+	SettingManager();
+	~SettingManager();
 	void WriteKeyConfig(char* category, char* bind, char* value);
 	void WriteDefaults();
 	void InitSettings();
@@ -17,8 +27,6 @@ public:
 
 private:
 	ParseINI m_Cfg;
-	DWORD KEY_INF_HEALTH;
-	DWORD KEY_INF_MANA;
-	DWORD KEY_INF_AMMO;
-	DWORD KEY_INF_GOLD;
+	KEY k;
+	KEY* Key;
 };

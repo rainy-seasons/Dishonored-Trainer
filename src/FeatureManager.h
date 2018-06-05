@@ -47,6 +47,9 @@ private:
 	Feature m_InfiniteHealth;
 	FeatureReadOnly m_CurrentLeftHand;
 
+	void DebugOutput();
+	int GetHealth();
+
 	int m_MaxAmmo;
 	DWORD m_BaseAddr;
 	bool m_InfiniteAmmoState;

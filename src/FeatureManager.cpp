@@ -138,3 +138,13 @@ void FeatureManager::InfAmmo()
 			break;
 	}
 }
+
+void FeatureManager::DebugOutput()
+{
+	printf("Current health: %s", GetHealth());
+}
+
+int FeatureManager::GetHealth()
+{
+	return Mem.Read<DWORD>(m_BaseAddr + 0x0103CC84 + 0x8 + 0x24 + 0x15C + 0x344);
+}
