@@ -32,7 +32,8 @@ public:
 	FeatureManager();
 	~FeatureManager();
 	Feature Setup(Feature feature, std::vector<DWORD> v_offsets, int MaxValue, bool ActiveState);
-	void InfResource(DWORD ResourceBase, std::vector<DWORD> v_offsets, int MaxValue);
+	//void InfResource(DWORD ResourceBase, std::vector<DWORD> v_offsets, int MaxValue);
+	void InfResource(Feature feature);
 	void SetAmmo(WeaponOffset offset);
 	void InfAmmo();
 	DWORD InitOffsets(std::vector<DWORD> v_offsets);
@@ -53,6 +54,7 @@ private:
 	int m_MaxAmmo;
 	DWORD m_BaseAddr;
 	bool m_InfiniteAmmoState;
+	bool m_dbg;
 
 	std::vector<DWORD> m_vecWeaponAmmoBase = { 0x0103CC9C, 0x20, 0x24, 0x54, 0xBC, 0x0 };
 };

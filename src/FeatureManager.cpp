@@ -2,6 +2,8 @@
 
 FeatureManager::FeatureManager()
 {
+	m_dbg = TRUE; // debug options
+
 	if (!Mem.Process()) { std::cout << " \nMem.Process() Fail\n"; }
 	m_BaseAddr   = Mem.Module("Dishonored.exe");
 	m_MaxAmmo = 99;
@@ -38,13 +40,13 @@ void FeatureManager::Run()
  	FeatureManager::CheckInput();
 
 	if (m_InfiniteMana.b_ActiveState)
-		InfResource(m_InfiniteMana.dw_Base, m_InfiniteMana.vec_offsets, m_InfiniteMana.l_MaxValue);
+		InfResource(m_InfiniteMana);
 
 	if (m_InfiniteHealth.b_ActiveState)
-		InfResource(m_InfiniteHealth.dw_Base, m_InfiniteHealth.vec_offsets, m_InfiniteHealth.l_MaxValue);
+		InfResource(m_InfiniteHealth);
 
 	if (m_InfiniteGold.b_ActiveState)
-		InfResource(m_InfiniteGold.dw_Base, m_InfiniteGold.vec_offsets, m_InfiniteGold.l_MaxValue);
+		InfResource(m_InfiniteGold);
 
 	if (m_InfiniteAmmoState)
 		InfAmmo();
@@ -52,6 +54,14 @@ void FeatureManager::Run()
 
 void FeatureManager::CheckInput()
 {
+	if (m_dbg)
+	{
+		if (GetAsyncKeyState(VK_INSERT))
+		{
+			DebugOutput();
+		}
+	}
+
 	if (GetAsyncKeyState(Settings.GetHealthKey()))
 	{
 		m_InfiniteHealth.b_ActiveState = !m_InfiniteHealth.b_ActiveState;
@@ -95,12 +105,12 @@ DWORD FeatureManager::InitOffsets(std::vector<DWORD> v_offsets)
 	return BaseAddress;
 }
 
-void FeatureManager::InfResource(DWORD ResourceBase, std::vector<DWORD> v_offsets, int MaxValue)
+void FeatureManager::InfResource(Feature feature)
 {
-	DWORD dw_Resource = Mem.Read<DWORD>(ResourceBase + v_offsets.back());
-	if (dw_Resource < MaxValue)
+	DWORD dw_Resource = Mem.Read<DWORD>(feature.dw_Base + feature.vec_offsets.back());
+	if (dw_Resource < feature.l_MaxValue)
 	{
-		Mem.Write<DWORD>(ResourceBase + v_offsets.back(), MaxValue);
+		Mem.Write<DWORD>(feature.dw_Base + feature.vec_offsets.back(), feature.l_MaxValue);
 	}
 }
 
