@@ -3,6 +3,8 @@
 #include "SettingManager.h"
 #include "../lib/PMemory.h"
 
+// ReadOnly refers to the behavior of the members
+// in relation to memory of the target process. 
 struct FeatureReadOnly
 {
 	std::vector<DWORD> vec_offsets {};

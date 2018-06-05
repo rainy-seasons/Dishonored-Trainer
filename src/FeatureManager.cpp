@@ -14,6 +14,7 @@ FeatureManager::FeatureManager()
 	m_CurrentLeftHand.vec_offsets  = { 0x0104CF44, 0x1C, 0xC, 0x5C, 0xD0, 0x238 };
 	m_CurrentLeftHand.dw_Base      = FeatureManager::InitOffsets(m_CurrentLeftHand.vec_offsets);
 
+	// These hex values are paths to the desired address, see FeatureManager::InitOffsets().
 	m_InfiniteMana   = FeatureManager::Setup(m_InfiniteMana,   { 0x01065184, 0xEC, 0x0, 0x5A8 }, 100, false);
 	m_InfiniteGold   = FeatureManager::Setup(m_InfiniteGold,   { 0x01065184, 0xEC, 0x0, 0xE4, 0xC8, 0x88 }, 999, false);
 	m_InfiniteHealth = FeatureManager::Setup(m_InfiniteHealth, { 0x0103CC84, 0x8, 0x24, 0x15C, 0x344 }, 90, false);
@@ -29,6 +30,7 @@ Feature FeatureManager::Setup(Feature feature, std::vector<DWORD> v_offsets, int
 	feature.dw_Base       = FeatureManager::InitOffsets(feature.vec_offsets);
 	feature.l_MaxValue    = MaxValue;
 	feature.b_ActiveState = ActiveState;
+	return feature;
 }
 
 void FeatureManager::Run()
@@ -84,7 +86,7 @@ DWORD FeatureManager::InitOffsets(std::vector<DWORD> v_offsets)
 	DWORD BaseAddress = m_BaseAddr;
 
 	// stop at the 2nd to last element to add it on later, 
-	// do this because we want the address instead of the value when we go to write to it
+	// do this because we want the address instead of the value when we go to write to it.
 	for (std::vector<DWORD>::iterator itr = v_offsets.begin(); itr < v_offsets.end() - 1; ++itr)
 	{
 		BaseAddress = Mem.Read<DWORD>(BaseAddress + *itr);
