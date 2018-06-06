@@ -13,7 +13,7 @@ SettingManager::SettingManager()
 
 SettingManager::~SettingManager()
 {
-	free(Key);
+	delete Key;
 }
 
 bool SettingManager::FileExists(const std::string &filename)

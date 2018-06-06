@@ -59,6 +59,7 @@ void FeatureManager::CheckInput()
 		if (GetAsyncKeyState(VK_INSERT))
 		{
 			DebugOutput();
+			Sleep(150);
 		}
 	}
 
@@ -151,10 +152,10 @@ void FeatureManager::InfAmmo()
 
 void FeatureManager::DebugOutput()
 {
-	printf("Current health: %s", GetHealth());
+	printf("Current Health: %d\n", GetHealth());
 }
 
 int FeatureManager::GetHealth()
 {
-	return Mem.Read<DWORD>(m_BaseAddr + 0x0103CC84 + 0x8 + 0x24 + 0x15C + 0x344);
+	return Mem.Read<int>(m_InfiniteHealth.dw_Base + m_InfiniteHealth.vec_offsets.back());
 }
