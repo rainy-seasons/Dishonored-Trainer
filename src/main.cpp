@@ -38,5 +38,10 @@ void Display()
 	std::cout << "|| [ L ARROW ] --> Toggle Infinite Mana	  ||\n";
 	std::cout << "|| [ U ARROW ] --> Toggle Infinite Ammo   ||\n";
 	std::cout << "|| [ D ARROW ] --> Toggle Infinite Gold   ||\n";
-	std::cout << "--------------------------------------------\n\n";
+	std::cout << "--------------------------------------------\n";
+	if (Feature.IsDebug())
+	{
+		std::cout << "|| [   INS   ] --> Print Debug Info       ||\n";
+		std::cout << "--------------------------------------------\n\n";
+	}
 }

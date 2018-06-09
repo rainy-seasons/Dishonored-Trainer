@@ -19,11 +19,11 @@ struct Feature : FeatureReadOnly
 
 enum WeaponOffset
 {
-	e_Pistol      = 0x0,
-	e_RegBolts    = 0x10,
-	e_SleepBolts  = 0x18,
-	e_IncenBolts  = 0x20,
-	e_SpringRazor = 0x28,
+	PISTOL      = 0x0,
+	REGBOLTS    = 0x10,
+	SLEEPBOLTS  = 0x18,
+	INCENBOLTS  = 0x20,
+	SPRINGRAZOR = 0x28,
 };
 
 class FeatureManager
@@ -32,11 +32,11 @@ public:
 	FeatureManager();
 	~FeatureManager();
 	Feature Setup(Feature feature, std::vector<DWORD> v_offsets, int MaxValue, bool ActiveState);
-	//void InfResource(DWORD ResourceBase, std::vector<DWORD> v_offsets, int MaxValue);
+	DWORD InitOffsets(std::vector<DWORD> v_offsets);
+	bool IsDebug();
 	void InfResource(Feature feature);
 	void SetAmmo(WeaponOffset offset);
 	void InfAmmo();
-	DWORD InitOffsets(std::vector<DWORD> v_offsets);
 	void CheckInput();
 	void Run();
 
@@ -50,6 +50,7 @@ private:
 
 	void DebugOutput();
 	int GetHealth();
+	int GetMana();
 
 	int m_MaxAmmo;
 	DWORD m_BaseAddr;

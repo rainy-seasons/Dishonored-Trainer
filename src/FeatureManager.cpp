@@ -22,9 +22,7 @@ FeatureManager::FeatureManager()
 	m_InfiniteHealth = FeatureManager::Setup(m_InfiniteHealth, { 0x0103CC84, 0x8, 0x24, 0x15C, 0x344 }, 90, false);
 }
 
-FeatureManager::~FeatureManager()
-{
-}
+FeatureManager::~FeatureManager() {}
 
 Feature FeatureManager::Setup(Feature feature, std::vector<DWORD> v_offsets, int MaxValue, bool ActiveState)
 {
@@ -128,22 +126,22 @@ void FeatureManager::SetAmmo(WeaponOffset offset)
 
 void FeatureManager::InfAmmo()
 {
-	switch (Mem.Read<DWORD>(m_CurrentLeftHand.dw_Base + m_CurrentLeftHand.vec_offsets.back())) // Get the current held weapon
+	switch (Mem.Read<DWORD>(m_CurrentLeftHand.dw_Base + m_CurrentLeftHand.vec_offsets.back())) // Get the current held weapon 
 	{
 		case 0:
-			FeatureManager::SetAmmo(e_Pistol);
+			FeatureManager::SetAmmo(PISTOL);
 			break;
 		case 1:
-			FeatureManager::SetAmmo(e_RegBolts);
+			FeatureManager::SetAmmo(REGBOLTS);
 			break;
 		case 2:
-			FeatureManager::SetAmmo(e_SpringRazor);
+			FeatureManager::SetAmmo(SPRINGRAZOR);
 			break;
 		case 3:
-			FeatureManager::SetAmmo(e_SleepBolts);
+			FeatureManager::SetAmmo(SLEEPBOLTS);
 			break;
 		case 4:
-			FeatureManager::SetAmmo(e_IncenBolts);
+			FeatureManager::SetAmmo(INCENBOLTS);
 			break;
 		case 6:    // blink
 			break;
@@ -153,9 +151,9 @@ void FeatureManager::InfAmmo()
 void FeatureManager::DebugOutput()
 {
 	printf("Current Health: %d\n", GetHealth());
+	printf("Current Mana:   %d\n", GetMana());
 }
 
-int FeatureManager::GetHealth()
-{
-	return Mem.Read<int>(m_InfiniteHealth.dw_Base + m_InfiniteHealth.vec_offsets.back());
-}
+bool FeatureManager::IsDebug()  { return m_dbg; }
+int FeatureManager::GetHealth() { return Mem.Read<int>(m_InfiniteHealth.dw_Base + m_InfiniteHealth.vec_offsets.back()); }
+int FeatureManager::GetMana()   { return Mem.Read<int>(m_InfiniteMana.dw_Base + m_InfiniteMana.vec_offsets.back()); }
