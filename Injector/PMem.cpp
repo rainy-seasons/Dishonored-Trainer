@@ -1,4 +1,4 @@
-#include "PMemory.h"
+#include "PMem.h"
 #include <stdio.h>
 
 PMemory::PMemory()
@@ -20,7 +20,7 @@ bool PMemory::Process()
 		m_pHandle = OpenProcess(PROCESS_ALL_ACCESS, NULL, m_PID);
 		return true;
 	}
-	
+
 	return FALSE;
 }
 

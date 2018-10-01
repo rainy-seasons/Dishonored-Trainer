@@ -28,7 +28,7 @@ public:
 			char bStr[128];
 			sprintf(bStr, buffer);
 			return std::stoi(bStr);
-		}	
+		}
 		return -1;
 	}
 
