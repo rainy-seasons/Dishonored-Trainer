@@ -10,7 +10,7 @@
 
 # How to use
 * Build with Visual Studio
-* Run the injector with the DLL in the same directory.
+* Run the injector with the DLL in the same directory, with the game already running.
 * No 3rd party dependencies.
 
 * If there's a feature you want, or a bug you want to fix, then submit a pull request or open an issue.
