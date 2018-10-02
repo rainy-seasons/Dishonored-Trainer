@@ -7,9 +7,8 @@ FeatureManager::FeatureManager()
 	m_BaseAddr = (DWORD)GetModuleHandle("Dishonored.exe");
 	m_MaxAmmo = 99;
 
-	// The hex values are pointer paths to the desired address, see Features::InitOffsets().
-	m_InfiniteMana = FeatureManager::Setup(m_InfiniteMana, { 0x01065184, 0xEC, 0x0, 0x5A8 }, 100, false);
-	m_InfiniteHealth = FeatureManager::Setup(m_InfiniteHealth, { 0x01065184, 0x194, 0x44, 0x18, 0x48, 0x344 }, 90, false);
+	m_InfiniteMana = FeatureManager::Setup(m_InfiniteMana, { 0xA60 }, 100, false);
+	m_InfiniteHealth = FeatureManager::Setup(m_InfiniteHealth, { 0x344 }, 90, false);
 }
 
 FeatureManager::~FeatureManager()
@@ -31,11 +30,12 @@ void FeatureManager::Run()
 
 	if (m_InfiniteMana.b_ActiveState)
 	{
-		
+		Mem.WriteMemory<int>((*(uintptr_t*)m_Offset.PlayerBase) + m_InfiniteMana.vec_offsets.back(), 100);
 	}
 
 	if (m_InfiniteHealth.b_ActiveState)
 	{
+		Mem.WriteMemory<int>((*(uintptr_t*)m_Offset.PlayerBase) + m_InfiniteHealth.vec_offsets.back(), 100);
 	}
 }
 
@@ -52,15 +52,15 @@ void FeatureManager::CheckInput()
 
 	if (GetAsyncKeyState(VK_LEFT))
 	{
-		printf("Infinite Health = %d\n", m_InfiniteHealth.b_ActiveState);
 		m_InfiniteHealth.b_ActiveState = !m_InfiniteHealth.b_ActiveState;
+		printf("Infinite Health = %d\n", m_InfiniteHealth.b_ActiveState);
 		Sleep(150);
 	}
 
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
-		printf("Infinite Mana = %d\n", m_InfiniteMana.b_ActiveState);
 		m_InfiniteMana.b_ActiveState = !m_InfiniteMana.b_ActiveState;
+		printf("Infinite Mana = %d\n", m_InfiniteMana.b_ActiveState);
 		Sleep(150);
 	}
 }
@@ -95,6 +95,5 @@ void FeatureManager::DebugOutput()
 }
 
 bool FeatureManager::IsDebug()  { return m_dbg; }
-int FeatureManager::GetHealth() { return *(int*)(*(uintptr_t*)(m_Offset.PlayerBase) + m_Offset.Health); }
-int FeatureManager::GetMana() { return *(int*)(*(uintptr_t*)(m_Offset.PlayerBase) + m_Offset.Mana); }
-
+int FeatureManager::GetHealth() { return Mem.ReadMemory<int>((*(uintptr_t*)m_Offset.PlayerBase) + m_InfiniteHealth.vec_offsets.back()); }
+int FeatureManager::GetMana() { return Mem.ReadMemory<int>((*(uintptr_t*)m_Offset.PlayerBase) + m_InfiniteMana.vec_offsets.back()); }
