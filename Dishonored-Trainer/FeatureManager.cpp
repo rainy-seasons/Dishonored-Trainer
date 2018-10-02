@@ -6,7 +6,6 @@ FeatureManager::FeatureManager()
 	m_dbg = TRUE;
 	m_BaseAddr = (DWORD)GetModuleHandle("Dishonored.exe");
 	Player = *(CPlayer**)0x1452DE8;
-	m_MaxAmmo = 99;
 }
 
 void FeatureManager::Run()

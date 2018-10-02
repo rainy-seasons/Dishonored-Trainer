@@ -29,8 +29,6 @@ private:
 	int GetMana();
 
 	DWORD m_BaseAddr;
-	int m_MaxAmmo;
-	bool m_InfiniteAmmoState;
 	bool m_dbg;
 };
 

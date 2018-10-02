@@ -1,14 +1,6 @@
 #include "PMemory.h"
 #include <stdio.h>
 
-PMemory::PMemory()
-{
-}
-
-PMemory::~PMemory()
-{
-}
-
 bool PMemory::Process()
 {
 	m_pEntry.dwSize = sizeof(m_pEntry);
@@ -45,7 +37,5 @@ DWORD PMemory::Module(LPSTR ModuleName)
 	return 0;
 }
 
-HANDLE PMemory::GetHandle()
-{
-	return m_pHandle;
-}
+HANDLE PMemory::GetHandle() { return m_pHandle; }
+void PMemory::CleanHandle() { CloseHandle(m_pHandle); }
