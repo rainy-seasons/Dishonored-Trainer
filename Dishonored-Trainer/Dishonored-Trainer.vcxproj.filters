@@ -36,7 +36,7 @@
     <ClInclude Include="FeatureManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Offsets.h">
+    <ClInclude Include="CPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

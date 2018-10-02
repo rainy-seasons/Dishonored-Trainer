@@ -145,8 +145,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CPlayer.h" />
     <ClInclude Include="FeatureManager.h" />
-    <ClInclude Include="Offsets.h" />
     <ClInclude Include="ParseINI.h" />
     <ClInclude Include="PMemory.h" />
     <ClInclude Include="stdafx.h" />
