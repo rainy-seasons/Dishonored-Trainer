@@ -3,6 +3,7 @@
 #include <string>
 #include <windows.h>
 #include "PMemory.h"
+#include "Offsets.h"
 
 struct FeatureReadOnly
 {
@@ -33,6 +34,7 @@ private:
 	Feature m_InfiniteMana;
 	Feature m_InfiniteHealth;
 	FeatureReadOnly m_CurrentLeftHand;
+	Offsets m_Offset;
 
 	void DebugOutput();
 	int GetHealth();

@@ -6,7 +6,6 @@ FeatureManager::FeatureManager()
 	m_dbg = TRUE;
 	m_BaseAddr = (DWORD)GetModuleHandle("Dishonored.exe");
 	m_MaxAmmo = 99;
-	m_InfiniteAmmoState = false;
 
 	// The hex values are pointer paths to the desired address, see Features::InitOffsets().
 	m_InfiniteMana = FeatureManager::Setup(m_InfiniteMana, { 0x01065184, 0xEC, 0x0, 0x5A8 }, 100, false);
@@ -31,10 +30,13 @@ void FeatureManager::Run()
 	FeatureManager::CheckInput();
 
 	if (m_InfiniteMana.b_ActiveState)
-		InfResource(m_InfiniteMana);
+	{
+		
+	}
 
 	if (m_InfiniteHealth.b_ActiveState)
-		InfResource(m_InfiniteHealth);
+	{
+	}
 }
 
 void FeatureManager::CheckInput()
@@ -93,6 +95,6 @@ void FeatureManager::DebugOutput()
 }
 
 bool FeatureManager::IsDebug()  { return m_dbg; }
-int FeatureManager::GetHealth() { return Mem.ReadMemory<DWORD>(m_InfiniteHealth.dw_Base + m_InfiniteHealth.vec_offsets.back()); }
-int FeatureManager::GetMana()   { return Mem.ReadMemory<DWORD>(m_InfiniteMana.dw_Base + m_InfiniteMana.vec_offsets.back()); }
+int FeatureManager::GetHealth() { return *(int*)(*(uintptr_t*)(m_Offset.PlayerBase) + m_Offset.Health); }
+int FeatureManager::GetMana() { return *(int*)(*(uintptr_t*)(m_Offset.PlayerBase) + m_Offset.Mana); }
 
