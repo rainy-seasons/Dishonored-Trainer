@@ -14,12 +14,12 @@ void FeatureManager::Run()
 
 	if (State.InfHealth)
 	{
-		Player->Mana = 100;
+		Player->Health = Player->Max_Health;
 	}
 
 	if (State.InfMana)
 	{
-		Player->Health = 90;
+		Player->Mana = Player->Max_Mana;
 	}
 }
 
