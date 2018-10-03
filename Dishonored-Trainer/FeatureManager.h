@@ -25,8 +25,6 @@ private:
 	CPlayer* Player;
 
 	void DebugOutput();
-	int GetHealth();
-	int GetMana();
 
 	DWORD m_BaseAddr;
 	bool m_dbg;

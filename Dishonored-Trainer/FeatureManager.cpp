@@ -14,12 +14,12 @@ void FeatureManager::Run()
 
 	if (State.InfHealth)
 	{
-		Player->Health = Player->Max_Health;
+		Player->Health = Player->MaxHealth;
 	}
 
 	if (State.InfMana)
 	{
-		Player->Mana = Player->Max_Mana;
+		Player->Mana = Player->MaxMana;
 	}
 }
 
@@ -52,10 +52,8 @@ void FeatureManager::CheckInput()
 
 void FeatureManager::DebugOutput()
 {
-	printf("Current Health: %d\n", GetHealth());
-	printf("Current Mana:   %d\n", GetMana());
+	printf("Current Health: %d\n", Player->Health);
+	printf("Current Mana:   %d\n", Player->Mana);
 }
 
 bool FeatureManager::IsDebug()  { return m_dbg; }
-int FeatureManager::GetHealth() { return Player->Health; }
-int FeatureManager::GetMana()   { return Player->Mana; }
