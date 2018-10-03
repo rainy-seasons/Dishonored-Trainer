@@ -5,7 +5,6 @@
 
 void Injected();
 
-PMemory Mem;
 FeatureManager Feature;
 
 BOOL APIENTRY DllMain( HMODULE hModule,

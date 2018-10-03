@@ -5,10 +5,10 @@
 #include <Windows.h>
 #include <iostream>
 #include <stdio.h>
-#include "PMem.h"
+#include "ProcMem.h"
 
 void InjectDLL();
-PMemory Mem;
+ProcMem::PMemory Mem;
 
 int main()
 {
@@ -16,7 +16,7 @@ int main()
 		system("cls");
 		printf("Waiting for dishonored");
 		Sleep(300);
-	} while (!Mem.Process());
+	} while (!Mem.Process("Dishonored"));
 	std::cout << "\nFound Dishonored!" << std::endl;
 	Sleep(1000);
 

@@ -2,7 +2,6 @@
 #include <vector>
 #include <string>
 #include <windows.h>
-#include "PMemory.h"
 #include "CPlayer.h"
 
 struct FeatureStates
@@ -20,7 +19,6 @@ public:
 	void Run();
 
 private:
-	PMemory Mem;
 	FeatureStates State;
 	CPlayer* Player;
 

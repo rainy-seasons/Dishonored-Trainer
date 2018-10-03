@@ -2,10 +2,10 @@
 #include "WeaponEnum.h"
 
 FeatureManager::FeatureManager()
+	: m_dbg(TRUE), 
+	m_BaseAddr((DWORD)GetModuleHandle("Dishonored.exe")), 
+	Player(*(CPlayer**)0x1452DE8)
 {
-	m_dbg = TRUE;
-	m_BaseAddr = (DWORD)GetModuleHandle("Dishonored.exe");
-	Player = *(CPlayer**)0x1452DE8;
 }
 
 void FeatureManager::Run()
