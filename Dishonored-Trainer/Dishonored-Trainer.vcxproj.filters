@@ -36,6 +36,12 @@
     <ClInclude Include="CPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CInventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAmmo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

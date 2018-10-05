@@ -148,6 +148,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPlayer.h" />
+    <ClInclude Include="CInventory.h" />
+    <ClInclude Include="CAmmo.h" />
     <ClInclude Include="FeatureManager.h" />
     <ClInclude Include="ParseINI.h" />
     <ClInclude Include="stdafx.h" />

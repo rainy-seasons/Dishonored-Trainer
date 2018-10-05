@@ -8,6 +8,7 @@ struct FeatureStates
 {
 	bool InfHealth = FALSE;
 	bool InfMana   = FALSE;
+	bool InfAmmo   = FALSE;
 };
 
 class FeatureManager

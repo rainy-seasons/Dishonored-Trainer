@@ -3,19 +3,15 @@
 #include <stdio.h>
 #include "FeatureManager.h"
 
-void Injected();
+void HackThread();
+FeatureManager MainThread;
 
-FeatureManager Feature;
-
-BOOL APIENTRY DllMain( HMODULE hModule,
-					   DWORD  ul_reason_for_call,
-					   LPVOID lpReserved
-					 )
+BOOL APIENTRY DllMain( HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved )
 {
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
-		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)Injected, NULL, NULL, NULL);
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)HackThread, NULL, NULL, NULL);
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:
 	case DLL_PROCESS_DETACH:
@@ -24,13 +20,13 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	return TRUE;
 }
 
-void Injected()
+void HackThread()
 {
 	AllocConsole();
 	freopen("CONOUT$", "w", stdout);
 	printf("injected!\n\n");
 	for (;;)
 	{
-		Feature.Run();
+		MainThread.Run();
 	}
 }
