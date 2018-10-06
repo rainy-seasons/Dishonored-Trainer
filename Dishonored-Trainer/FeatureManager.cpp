@@ -2,7 +2,7 @@
 
 FeatureManager::FeatureManager()
 	: m_dbg(TRUE), 
-	m_BaseAddr((DWORD)GetModuleHandle("Dishonored.exe")),
+	m_BaseAddr((DWORD)GetModuleHandle(L"Dishonored.exe")),
 	Player(*(CPlayer**)0x1452DE8)
 {
 
@@ -26,6 +26,13 @@ void FeatureManager::Run()
 	{
 		// TODO: 
 		// Find pointer to active weapon and update this accordingly.
+
+		if( ( Player->Inventory == nullptr ) || ( Player->Inventory->Ammo == nullptr ) )
+		{
+			printf( "Player point is invalid!" );
+			return;
+		}
+
 		Player->Inventory->Ammo->Pistol = Player->Inventory->Ammo->CrossbowStd_Max;
 		Player->Inventory->Ammo->CrossbowStd = Player->Inventory->Ammo->CrossbowStd_Max;
 		Player->Inventory->Ammo->SleepDarts = Player->Inventory->Ammo->CrossbowStd_Max;
