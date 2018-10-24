@@ -1,8 +1,7 @@
 #include "FeatureManager.h"
 
 FeatureManager::FeatureManager()
-	: m_dbg(TRUE), 
-	m_BaseAddr((DWORD)GetModuleHandle(L"Dishonored.exe")),
+	:m_BaseAddr((DWORD)GetModuleHandle(L"Dishonored.exe")),
 	Player(*(CPlayer**)0x1452DE8)
 {
 
@@ -27,9 +26,9 @@ void FeatureManager::Run()
 		// TODO: 
 		// Find pointer to active weapon and update this accordingly.
 
-		if( ( Player->Inventory == nullptr ) || ( Player->Inventory->Ammo == nullptr ) )
+		if((!Player->Inventory) || (!Player->Inventory->Ammo))
 		{
-			printf( "Player point is invalid!" );
+			printf( "Player pointer is invalid!" );
 			return;
 		}
 
@@ -43,14 +42,13 @@ void FeatureManager::Run()
 
 void FeatureManager::CheckInput()
 {
-	if (m_dbg)
+#ifdef _DEBUG
+	if (GetAsyncKeyState(VK_INSERT))
 	{
-		if (GetAsyncKeyState(VK_INSERT))
-		{
-			DebugOutput();
-			Sleep(150);
-		}
+		DebugOutput();
+		Sleep(150);
 	}
+#endif
 
 	if (GetAsyncKeyState(VK_LEFT))
 	{
@@ -80,5 +78,3 @@ void FeatureManager::DebugOutput()
 	printf("Current Health: %d\n", Player->Health);
 	printf("Current Mana:   %d\n", Player->Mana);
 }
-
-bool FeatureManager::IsDebug()  { return m_dbg; }
