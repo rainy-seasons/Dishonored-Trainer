@@ -36,6 +36,7 @@ namespace ProcMem
 		CloseHandle(hModule);
 
 		std::cout << "Could not locate module: " << ModuleName << std::endl;
+		return 0;
 	}
 
 	HANDLE PMemory::GetHandle() { return m_pHandle; }
