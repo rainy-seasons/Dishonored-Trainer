@@ -1,11 +1,9 @@
 #include "FeatureManager.h"
 
 FeatureManager::FeatureManager()
-	: m_dbg(TRUE), 
-	m_BaseAddr((DWORD)GetModuleHandle("Dishonored.exe")),
+	: m_BaseAddr((DWORD)GetModuleHandle("Dishonored.exe")),
 	Player(*(CPlayer**)0x1452DE8)
 {
-
 }
 
 void FeatureManager::Run()
@@ -36,14 +34,13 @@ void FeatureManager::Run()
 
 void FeatureManager::CheckInput()
 {
-	if (m_dbg)
+#ifdef _DEBUG
+	if (GetAsyncKeyState(VK_INSERT))
 	{
-		if (GetAsyncKeyState(VK_INSERT))
-		{
-			DebugOutput();
-			Sleep(150);
-		}
+		DebugOutput();
+		Sleep(150);
 	}
+#endif
 
 	if (GetAsyncKeyState(VK_LEFT))
 	{
@@ -73,5 +70,3 @@ void FeatureManager::DebugOutput()
 	printf("Current Health: %d\n", Player->Health);
 	printf("Current Mana:   %d\n", Player->Mana);
 }
-
-bool FeatureManager::IsDebug()  { return m_dbg; }

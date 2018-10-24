@@ -15,7 +15,6 @@ class FeatureManager
 {
 public:
 	FeatureManager();
-	bool IsDebug();
 	void CheckInput();
 	void Run();
 
@@ -26,6 +25,5 @@ private:
 	void DebugOutput();
 
 	DWORD m_BaseAddr;
-	bool m_dbg;
 };
 
